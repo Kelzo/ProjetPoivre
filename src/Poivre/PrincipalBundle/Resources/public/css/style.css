@@ -1,0 +1,9 @@
+body{
+	border: 0px;	
+}
+
+#wrapper{
+	width: 950px;
+	border: 1px solid #000;
+	height: 500px;	
+}

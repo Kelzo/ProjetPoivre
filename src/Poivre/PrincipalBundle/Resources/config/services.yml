@@ -1,0 +1,7 @@
+parameters:
+#    poivre_principal.example.class: Poivre\PrincipalBundle\Example
+
+services:
+#    poivre_principal.example:
+#        class: %poivre_principal.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

@@ -1,10 +1,16 @@
+PoivrePrincipalBundle:
+    resource: "@PoivrePrincipalBundle/Resources/config/routing.yml"
+    prefix:   /
+
 PoivreUserBundle:
     resource: "@PoivreUserBundle/Resources/config/routing.yml"
     prefix:   /
 HelloTheWorld:
-    pattern:  /hello-world
-    defaults: { _controller: PoivreUserBundle:User:index }
-
+    pattern:  /connexion
+    defaults: { _controller: PoivreUserBundle:User:connexion }
+Index:
+    pattern: /
+    defaults: { _controller: PoivrePrincipalBundle:Principal:index }
 
 # Internal routing configuration to handle ESI
 #_internal:
