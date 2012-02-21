@@ -1,0 +1,3 @@
+PoivreNoteBundle_homepage:
+    pattern:  /hello/{name}
+    defaults: { _controller: PoivreNoteBundle:Default:index }

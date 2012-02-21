@@ -1,0 +1,7 @@
+parameters:
+#    poivre_note.example.class: Poivre\NoteBundle\Example
+
+services:
+#    poivre_note.example:
+#        class: %poivre_note.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

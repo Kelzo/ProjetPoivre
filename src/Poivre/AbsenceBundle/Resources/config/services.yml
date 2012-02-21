@@ -1,0 +1,7 @@
+parameters:
+#    poivre_absence.example.class: Poivre\AbsenceBundle\Example
+
+services:
+#    poivre_absence.example:
+#        class: %poivre_absence.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

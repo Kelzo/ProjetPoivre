@@ -1,1 +1,3 @@
-
+poivreuser:
+    pattern:  /
+    defaults: {  _controller: PoivreUserBundle:User:index }

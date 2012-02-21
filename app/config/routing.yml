@@ -1,16 +1,45 @@
+PoivreNoteBundle:
+    resource: "@PoivreNoteBundle/Resources/config/routing.yml"
+    prefix:   /note
+
+PoivrePlanningBundle:
+    resource: "@PoivrePlanningBundle/Resources/config/routing.yml"
+    prefix:   /planning
+
+PoivreAbsenceBundle:
+    resource: "@PoivreAbsenceBundle/Resources/config/routing.yml"
+    prefix:   /absence
+
 PoivrePrincipalBundle:
     resource: "@PoivrePrincipalBundle/Resources/config/routing.yml"
     prefix:   /
 
 PoivreUserBundle:
     resource: "@PoivreUserBundle/Resources/config/routing.yml"
-    prefix:   /
-HelloTheWorld:
+    prefix:   /user
+
+fos_user_security:
+    resource: "@FOSUserBundle/Resources/config/routing/security.xml"
+
+fos_user_test:
     pattern:  /connexion
-    defaults: { _controller: PoivreUserBundle:User:connexion }
-Index:
-    pattern: /
-    defaults: { _controller: PoivrePrincipalBundle:Principal:index }
+    defaults: {  _controller: FOSUserBundle:Security:login}
+
+fos_user_profile:
+    resource: "@FOSUserBundle/Resources/config/routing/profile.xml"
+    prefix: /profile
+
+fos_user_register:
+    resource: "@FOSUserBundle/Resources/config/routing/registration.xml"
+    prefix: /register
+
+fos_user_resetting:
+    resource: "@FOSUserBundle/Resources/config/routing/resetting.xml"
+    prefix: /resetting
+
+fos_user_change_password:
+    resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
+    prefix: /change-password
 
 # Internal routing configuration to handle ESI
 #_internal:
