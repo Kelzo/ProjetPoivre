@@ -1,7 +1,0 @@
-parameters:
-#    poivre_planning.example.class: Poivre\PlanningBundle\Example
-
-services:
-#    poivre_planning.example:
-#        class: %poivre_planning.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]

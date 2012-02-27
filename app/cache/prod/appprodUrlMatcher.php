@@ -25,17 +25,12 @@ class appprodUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirecta
         $allow = array();
         $pathinfo = urldecode($pathinfo);
 
-        // PoivrePrincipalBundle_homepage
-        if ($pathinfo === '/index') {
-            return array (  '_controller' => 'Poivre\\PrincipalBundle\\Controller\\PrincipalController::indexAction',  '_route' => 'PoivrePrincipalBundle_homepage',);
-        }
-
-        // poivreuser
-        if (rtrim($pathinfo, '/') === '/user') {
+        // poivre
+        if (rtrim($pathinfo, '/') === '/professeur') {
             if (substr($pathinfo, -1) !== '/') {
-                return $this->redirect($pathinfo.'/', 'poivreuser');
+                return $this->redirect($pathinfo.'/', 'poivre');
             }
-            return array (  '_controller' => 'Poivre\\UserBundle\\Controller\\UserController::indexAction',  '_route' => 'poivreuser',);
+            return array (  '_controller' => 'Poivre\\PrincipalBundle\\Controller\\PrincipalController::indexProfesseurAction',  '_route' => 'poivre',);
         }
 
         // fos_user_security_login

@@ -20,9 +20,6 @@ class AppKernel extends Kernel
 			new FOS\UserBundle\FOSUserBundle(),
             new Poivre\UserBundle\PoivreUserBundle(),
             new Poivre\PrincipalBundle\PoivrePrincipalBundle(),
-            new Poivre\AbsenceBundle\PoivreAbsenceBundle(),
-            new Poivre\PlanningBundle\PoivrePlanningBundle(),
-            new Poivre\NoteBundle\PoivreNoteBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

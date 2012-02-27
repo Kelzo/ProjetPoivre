@@ -31,7 +31,7 @@ class __TwigTemplate_415d989686a5b0e877fb175caee5e94d extends Twig_Template
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("css/style.css"), "html", null, true);
         echo "\" type=\"text/css\" media=\"screen\" />
 \t\t
-    </head>
+    </head> 
 \t
 \t
     <body>
@@ -39,32 +39,26 @@ class __TwigTemplate_415d989686a5b0e877fb175caee5e94d extends Twig_Template
 \t\t<div id=\"head\">
 \t\tProjet Poivre
 \t\t</div>
-\t\t
+\t \t
 \t\t<div id=\"auth\">
-\t\t\t\t";
-        // line 22
-        echo "
 ";
-        // line 25
-        echo "
-";
-        // line 26
+        // line 20
         if ($this->env->getExtension('security')->isGranted("IS_AUTHENTICATED_REMEMBERED")) {
-            // line 27
-            echo "    Connecté en tant que ";
+            // line 21
+            echo "    ConnectÃ© en tant que ";
             echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute($this->getContext($context, "app"), "user"), "username"), "html", null, true);
             echo " - <a href=\"";
             echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("fos_user_security_logout"), "html", null, true);
-            echo "\">Déconnexion</a>
+            echo "\">DÃ©connexion</a>
 ";
         } else {
-            // line 29
+            // line 23
             echo "    <a href=\"";
             echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("fos_user_security_login"), "html", null, true);
             echo "\">Connexion</a>
 ";
         }
-        // line 31
+        // line 25
         echo "\t\t</div>
 \t\t
 \t\t
@@ -76,9 +70,9 @@ class __TwigTemplate_415d989686a5b0e877fb175caee5e94d extends Twig_Template
 \t\t
 \t\t<div id=\"main\">
 \t\t\t";
-        // line 41
+        // line 35
         $this->displayBlock('body', $context, $blocks);
-        // line 43
+        // line 37
         echo "\t\t<div>
 \t\t
     </body>
@@ -92,10 +86,10 @@ class __TwigTemplate_415d989686a5b0e877fb175caee5e94d extends Twig_Template
         echo "Projet Poivre";
     }
 
-    // line 41
+    // line 35
     public function block_body($context, array $blocks = array())
     {
-        // line 42
+        // line 36
         echo "\t\t\t";
     }
 

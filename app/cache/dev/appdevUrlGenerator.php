@@ -23,11 +23,9 @@ class appdevUrlGenerator extends Symfony\Component\Routing\Generator\UrlGenerato
        '_configurator_home' => true,
        '_configurator_step' => true,
        '_configurator_final' => true,
-       'PoivreNoteBundle_homepage' => true,
-       'PoivrePlanningBundle_homepage' => true,
-       'PoivreAbsenceBundle_homepage' => true,
-       'PoivrePrincipalBundle_homepage' => true,
-       'poivreuser' => true,
+       'index_admin' => true,
+       'index_etudiant' => true,
+       'index_professeur' => true,
        'fos_user_security_login' => true,
        'fos_user_security_check' => true,
        'fos_user_security_logout' => true,
@@ -116,29 +114,19 @@ class appdevUrlGenerator extends Symfony\Component\Routing\Generator\UrlGenerato
         return array(array (), array (  '_controller' => 'Sensio\\Bundle\\DistributionBundle\\Controller\\ConfiguratorController::finalAction',), array (), array (  0 =>   array (    0 => 'text',    1 => '/_configurator/final',  ),));
     }
 
-    private function getPoivreNoteBundle_homepageRouteInfo()
+    private function getindex_adminRouteInfo()
     {
-        return array(array (  0 => 'name',), array (  '_controller' => 'Poivre\\NoteBundle\\Controller\\DefaultController::indexAction',), array (), array (  0 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'name',  ),  1 =>   array (    0 => 'text',    1 => '/note/hello',  ),));
+        return array(array (), array (  '_controller' => 'Poivre\\PrincipalBundle\\Controller\\PrincipalController::indexAdminAction',), array (), array (  0 =>   array (    0 => 'text',    1 => '/admin/',  ),));
     }
 
-    private function getPoivrePlanningBundle_homepageRouteInfo()
+    private function getindex_etudiantRouteInfo()
     {
-        return array(array (  0 => 'name',), array (  '_controller' => 'Poivre\\PlanningBundle\\Controller\\DefaultController::indexAction',), array (), array (  0 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'name',  ),  1 =>   array (    0 => 'text',    1 => '/planning/hello',  ),));
+        return array(array (), array (  '_controller' => 'Poivre\\PrincipalBundle\\Controller\\PrincipalController::indexEtudiantAction',), array (), array (  0 =>   array (    0 => 'text',    1 => '/etudiant/',  ),));
     }
 
-    private function getPoivreAbsenceBundle_homepageRouteInfo()
+    private function getindex_professeurRouteInfo()
     {
-        return array(array (  0 => 'name',), array (  '_controller' => 'Poivre\\AbsenceBundle\\Controller\\DefaultController::indexAction',), array (), array (  0 =>   array (    0 => 'variable',    1 => '/',    2 => '[^/]+?',    3 => 'name',  ),  1 =>   array (    0 => 'text',    1 => '/absence/hello',  ),));
-    }
-
-    private function getPoivrePrincipalBundle_homepageRouteInfo()
-    {
-        return array(array (), array (  '_controller' => 'Poivre\\PrincipalBundle\\Controller\\PrincipalController::indexAction',), array (), array (  0 =>   array (    0 => 'text',    1 => '/',  ),));
-    }
-
-    private function getpoivreuserRouteInfo()
-    {
-        return array(array (), array (  '_controller' => 'Poivre\\UserBundle\\Controller\\UserController::indexAction',), array (), array (  0 =>   array (    0 => 'text',    1 => '/user/',  ),));
+        return array(array (), array (  '_controller' => 'Poivre\\PrincipalBundle\\Controller\\PrincipalController::indexProfesseurAction',), array (), array (  0 =>   array (    0 => 'text',    1 => '/professeur/',  ),));
     }
 
     private function getfos_user_security_loginRouteInfo()

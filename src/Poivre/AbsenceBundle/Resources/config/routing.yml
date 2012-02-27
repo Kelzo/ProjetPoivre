@@ -1,3 +1,0 @@
-PoivreAbsenceBundle_homepage:
-    pattern:  /hello/{name}
-    defaults: { _controller: PoivreAbsenceBundle:Default:index }

@@ -84,35 +84,28 @@ class appdevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
 
         }
 
-        // PoivreNoteBundle_homepage
-        if (0 === strpos($pathinfo, '/note/hello') && preg_match('#^/note/hello/(?P<name>[^/]+?)$#xs', $pathinfo, $matches)) {
-            return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Poivre\\NoteBundle\\Controller\\DefaultController::indexAction',)), array('_route' => 'PoivreNoteBundle_homepage'));
-        }
-
-        // PoivrePlanningBundle_homepage
-        if (0 === strpos($pathinfo, '/planning/hello') && preg_match('#^/planning/hello/(?P<name>[^/]+?)$#xs', $pathinfo, $matches)) {
-            return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Poivre\\PlanningBundle\\Controller\\DefaultController::indexAction',)), array('_route' => 'PoivrePlanningBundle_homepage'));
-        }
-
-        // PoivreAbsenceBundle_homepage
-        if (0 === strpos($pathinfo, '/absence/hello') && preg_match('#^/absence/hello/(?P<name>[^/]+?)$#xs', $pathinfo, $matches)) {
-            return array_merge($this->mergeDefaults($matches, array (  '_controller' => 'Poivre\\AbsenceBundle\\Controller\\DefaultController::indexAction',)), array('_route' => 'PoivreAbsenceBundle_homepage'));
-        }
-
-        // PoivrePrincipalBundle_homepage
-        if (rtrim($pathinfo, '/') === '') {
+        // index_admin
+        if (rtrim($pathinfo, '/') === '/admin') {
             if (substr($pathinfo, -1) !== '/') {
-                return $this->redirect($pathinfo.'/', 'PoivrePrincipalBundle_homepage');
+                return $this->redirect($pathinfo.'/', 'index_admin');
             }
-            return array (  '_controller' => 'Poivre\\PrincipalBundle\\Controller\\PrincipalController::indexAction',  '_route' => 'PoivrePrincipalBundle_homepage',);
+            return array (  '_controller' => 'Poivre\\PrincipalBundle\\Controller\\PrincipalController::indexAdminAction',  '_route' => 'index_admin',);
         }
 
-        // poivreuser
-        if (rtrim($pathinfo, '/') === '/user') {
+        // index_etudiant
+        if (rtrim($pathinfo, '/') === '/etudiant') {
             if (substr($pathinfo, -1) !== '/') {
-                return $this->redirect($pathinfo.'/', 'poivreuser');
+                return $this->redirect($pathinfo.'/', 'index_etudiant');
             }
-            return array (  '_controller' => 'Poivre\\UserBundle\\Controller\\UserController::indexAction',  '_route' => 'poivreuser',);
+            return array (  '_controller' => 'Poivre\\PrincipalBundle\\Controller\\PrincipalController::indexEtudiantAction',  '_route' => 'index_etudiant',);
+        }
+
+        // index_professeur
+        if (rtrim($pathinfo, '/') === '/professeur') {
+            if (substr($pathinfo, -1) !== '/') {
+                return $this->redirect($pathinfo.'/', 'index_professeur');
+            }
+            return array (  '_controller' => 'Poivre\\PrincipalBundle\\Controller\\PrincipalController::indexProfesseurAction',  '_route' => 'index_professeur',);
         }
 
         // fos_user_security_login

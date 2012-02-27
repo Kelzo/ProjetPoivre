@@ -1,22 +1,14 @@
-PoivreNoteBundle:
-    resource: "@PoivreNoteBundle/Resources/config/routing.yml"
-    prefix:   /note
+principal:
+    resource: "@PoivrePrincipalBundle/Resources/config/routing/admin.yml"
+    prefix:   /admin
 
-PoivrePlanningBundle:
-    resource: "@PoivrePlanningBundle/Resources/config/routing.yml"
-    prefix:   /planning
+etudiant:
+    resource: "@PoivrePrincipalBundle/Resources/config/routing/etudiant.yml"
+    prefix:   /etudiant
 
-PoivreAbsenceBundle:
-    resource: "@PoivreAbsenceBundle/Resources/config/routing.yml"
-    prefix:   /absence
-
-PoivrePrincipalBundle:
-    resource: "@PoivrePrincipalBundle/Resources/config/routing.yml"
-    prefix:   /
-
-PoivreUserBundle:
-    resource: "@PoivreUserBundle/Resources/config/routing.yml"
-    prefix:   /user
+professeur:
+    resource: "@PoivrePrincipalBundle/Resources/config/routing/professeur.yml"
+    prefix:   /professeur
 
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"

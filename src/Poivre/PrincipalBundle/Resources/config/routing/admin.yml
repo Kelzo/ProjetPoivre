@@ -1,0 +1,3 @@
+index_admin:
+    pattern:  /
+    defaults: { _controller: PoivrePrincipalBundle:Principal:indexAdmin}

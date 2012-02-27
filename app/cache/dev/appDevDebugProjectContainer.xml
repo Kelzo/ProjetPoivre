@@ -20,9 +20,6 @@
       <parameter key="FOSUserBundle">FOS\UserBundle\FOSUserBundle</parameter>
       <parameter key="PoivreUserBundle">Poivre\UserBundle\PoivreUserBundle</parameter>
       <parameter key="PoivrePrincipalBundle">Poivre\PrincipalBundle\PoivrePrincipalBundle</parameter>
-      <parameter key="PoivreAbsenceBundle">Poivre\AbsenceBundle\PoivreAbsenceBundle</parameter>
-      <parameter key="PoivrePlanningBundle">Poivre\PlanningBundle\PoivrePlanningBundle</parameter>
-      <parameter key="PoivreNoteBundle">Poivre\NoteBundle\PoivreNoteBundle</parameter>
       <parameter key="WebProfilerBundle">Symfony\Bundle\WebProfilerBundle\WebProfilerBundle</parameter>
       <parameter key="SensioDistributionBundle">Sensio\Bundle\DistributionBundle\SensioDistributionBundle</parameter>
       <parameter key="SensioGeneratorBundle">Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle</parameter>
@@ -213,12 +210,11 @@
     <parameter key="security.authentication.hide_user_not_found">true</parameter>
     <parameter key="security.role_hierarchy.roles" type="collection">
       <parameter key="ROLE_ADMIN" type="collection">
-        <parameter>ROLE_USER</parameter>
+        <parameter>ROLE_ETUDIANT</parameter>
+        <parameter>ROLE_PROFESSEUR</parameter>
       </parameter>
       <parameter key="ROLE_SUPER_ADMIN" type="collection">
-        <parameter>ROLE_USER</parameter>
         <parameter>ROLE_ADMIN</parameter>
-        <parameter>ROLE_ALLOWED_TO_SWITCH</parameter>
       </parameter>
     </parameter>
     <parameter key="twig.class">Twig_Environment</parameter>
@@ -1097,24 +1093,6 @@
         <argument>fr</argument>
         <argument>messages</argument>
       </call>
-      <call method="addResource">
-        <argument>xliff</argument>
-        <argument>C:\wamp\www\poivre\src\Poivre\AbsenceBundle/Resources/translations\messages.fr.xliff</argument>
-        <argument>fr</argument>
-        <argument>messages</argument>
-      </call>
-      <call method="addResource">
-        <argument>xliff</argument>
-        <argument>C:\wamp\www\poivre\src\Poivre\PlanningBundle/Resources/translations\messages.fr.xliff</argument>
-        <argument>fr</argument>
-        <argument>messages</argument>
-      </call>
-      <call method="addResource">
-        <argument>xliff</argument>
-        <argument>C:\wamp\www\poivre\src\Poivre\NoteBundle/Resources/translations\messages.fr.xliff</argument>
-        <argument>fr</argument>
-        <argument>messages</argument>
-      </call>
     </service>
     <service id="translation.loader.php" class="Symfony\Component\Translation\Loader\PhpFileLoader">
       <tag name="translation.loader" alias="php"/>
@@ -1614,7 +1592,7 @@
       <argument type="collection">
         <argument type="service">
           <service class="Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider" public="false">
-            <argument>4f435be52c784</argument>
+            <argument>4f4b535102ccf</argument>
           </service>
         </argument>
         <argument type="service">
@@ -1637,11 +1615,6 @@
             <argument>main</argument>
           </service>
         </argument>
-        <argument type="service">
-          <service class="Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider" public="false">
-            <argument>4f435be52c784</argument>
-          </service>
-        </argument>
       </argument>
     </service>
     <service id="security.authentication.trust_resolver" class="Symfony\Component\Security\Core\Authentication\AuthenticationTrustResolver" public="false">
@@ -1657,12 +1630,11 @@
               <service class="Symfony\Component\Security\Core\Role\RoleHierarchy" public="false">
                 <argument type="collection">
                   <argument key="ROLE_ADMIN" type="collection">
-                    <argument>ROLE_USER</argument>
+                    <argument>ROLE_ETUDIANT</argument>
+                    <argument>ROLE_PROFESSEUR</argument>
                   </argument>
                   <argument key="ROLE_SUPER_ADMIN" type="collection">
-                    <argument>ROLE_USER</argument>
                     <argument>ROLE_ADMIN</argument>
-                    <argument>ROLE_ALLOWED_TO_SWITCH</argument>
                   </argument>
                 </argument>
               </service>
@@ -1717,7 +1689,74 @@
       </argument>
       <argument type="service" id="monolog.logger.security"/>
     </service>
-    <service id="security.access_map" class="Symfony\Component\Security\Http\AccessMap" public="false"/>
+    <service id="security.access_map" class="Symfony\Component\Security\Http\AccessMap" public="false">
+      <call method="add">
+        <argument type="service">
+          <service class="Symfony\Component\HttpFoundation\RequestMatcher" public="false">
+            <argument>^/login$</argument>
+          </service>
+        </argument>
+        <argument type="collection">
+          <argument>IS_AUTHENTICATED_ANONYMOUSLY</argument>
+        </argument>
+        <argument>null</argument>
+      </call>
+      <call method="add">
+        <argument type="service">
+          <service class="Symfony\Component\HttpFoundation\RequestMatcher" public="false">
+            <argument>^/register</argument>
+          </service>
+        </argument>
+        <argument type="collection">
+          <argument>IS_AUTHENTICATED_ANONYMOUSLY</argument>
+        </argument>
+        <argument>null</argument>
+      </call>
+      <call method="add">
+        <argument type="service">
+          <service class="Symfony\Component\HttpFoundation\RequestMatcher" public="false">
+            <argument>^/resetting</argument>
+          </service>
+        </argument>
+        <argument type="collection">
+          <argument>IS_AUTHENTICATED_ANONYMOUSLY</argument>
+        </argument>
+        <argument>null</argument>
+      </call>
+      <call method="add">
+        <argument type="service">
+          <service class="Symfony\Component\HttpFoundation\RequestMatcher" public="false">
+            <argument>^/etudiant</argument>
+          </service>
+        </argument>
+        <argument type="collection">
+          <argument>ROLE_ETUDIANT</argument>
+        </argument>
+        <argument>null</argument>
+      </call>
+      <call method="add">
+        <argument type="service">
+          <service class="Symfony\Component\HttpFoundation\RequestMatcher" public="false">
+            <argument>^/professeur</argument>
+          </service>
+        </argument>
+        <argument type="collection">
+          <argument>ROLE_PROFESSEUR</argument>
+        </argument>
+        <argument>null</argument>
+      </call>
+      <call method="add">
+        <argument type="service">
+          <service class="Symfony\Component\HttpFoundation\RequestMatcher" public="false">
+            <argument>^/admin</argument>
+          </service>
+        </argument>
+        <argument type="collection">
+          <argument>ROLE_SUPER_ADMIN</argument>
+        </argument>
+        <argument>null</argument>
+      </call>
+    </service>
     <service id="security.access_listener" class="Symfony\Component\Security\Http\Firewall\AccessListener" public="false">
       <tag name="monolog.logger" channel="security"/>
       <argument type="service" id="security.context"/>
@@ -1754,7 +1793,7 @@
         <argument type="service">
           <service class="Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener" public="false">
             <argument type="service" id="security.context"/>
-            <argument>4f435be52c784</argument>
+            <argument>4f4b535102ccf</argument>
             <argument type="service" id="monolog.logger.security"/>
           </service>
         </argument>
@@ -1904,13 +1943,6 @@
             <argument type="service" id="security.authentication.manager"/>
             <argument type="service" id="monolog.logger.security"/>
             <argument type="service" id="event_dispatcher"/>
-          </service>
-        </argument>
-        <argument type="service">
-          <service class="Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener" public="false">
-            <argument type="service" id="security.context"/>
-            <argument>4f435be52c784</argument>
-            <argument type="service" id="monolog.logger.security"/>
           </service>
         </argument>
         <argument type="service" id="security.access_listener"/>
@@ -2127,6 +2159,7 @@
             <argument type="collection">
               <argument key="FOSUserBundle">FOS\UserBundle\Entity</argument>
               <argument key="PoivreUserBundle">Poivre\UserBundle\Entity</argument>
+              <argument key="PoivrePrincipalBundle">Poivre\PrincipalBundle\Entity</argument>
             </argument>
           </call>
           <call method="setMetadataCacheImpl">
@@ -2187,10 +2220,27 @@
                       </argument>
                       <argument type="collection">
                         <argument>C:\wamp\www\poivre\src\Poivre\UserBundle\Entity</argument>
+                        <argument>C:\wamp\www\poivre\src\Poivre\PrincipalBundle\Entity</argument>
                       </argument>
                     </service>
                   </argument>
                   <argument>Poivre\UserBundle\Entity</argument>
+                </call>
+                <call method="addDriver">
+                  <argument type="service">
+                    <service class="Doctrine\ORM\Mapping\Driver\AnnotationDriver" public="false">
+                      <argument type="service">
+                        <service class="Symfony\Bridge\Doctrine\Annotations\IndexedReader" public="false">
+                          <argument type="service" id="annotation_reader"/>
+                        </service>
+                      </argument>
+                      <argument type="collection">
+                        <argument>C:\wamp\www\poivre\src\Poivre\UserBundle\Entity</argument>
+                        <argument>C:\wamp\www\poivre\src\Poivre\PrincipalBundle\Entity</argument>
+                      </argument>
+                    </service>
+                  </argument>
+                  <argument>Poivre\PrincipalBundle\Entity</argument>
                 </call>
               </service>
             </argument>
@@ -2554,87 +2604,6 @@
                   <argument type="service" id="templating.loader"/>
                   <argument>PoivrePrincipalBundle</argument>
                   <argument>C:\wamp\www\poivre\src\Poivre\PrincipalBundle/Resources/views</argument>
-                  <argument>/^[^.]+\.[^.]+\.twig$/</argument>
-                </service>
-              </argument>
-            </argument>
-          </service>
-        </argument>
-        <argument>twig</argument>
-      </call>
-      <call method="addResource">
-        <argument type="service">
-          <service class="Symfony\Bundle\AsseticBundle\Factory\Resource\CoalescingDirectoryResource" public="false">
-            <tag name="assetic.templating.twig"/>
-            <tag name="assetic.formula_resource" loader="twig"/>
-            <argument type="collection">
-              <argument type="service">
-                <service class="%assetic.directory_resource.class%" public="false">
-                  <argument type="service" id="templating.loader"/>
-                  <argument>PoivreAbsenceBundle</argument>
-                  <argument>C:\wamp\www\poivre\app/Resources/PoivreAbsenceBundle/views</argument>
-                  <argument>/^[^.]+\.[^.]+\.twig$/</argument>
-                </service>
-              </argument>
-              <argument type="service">
-                <service class="%assetic.directory_resource.class%" public="false">
-                  <argument type="service" id="templating.loader"/>
-                  <argument>PoivreAbsenceBundle</argument>
-                  <argument>C:\wamp\www\poivre\src\Poivre\AbsenceBundle/Resources/views</argument>
-                  <argument>/^[^.]+\.[^.]+\.twig$/</argument>
-                </service>
-              </argument>
-            </argument>
-          </service>
-        </argument>
-        <argument>twig</argument>
-      </call>
-      <call method="addResource">
-        <argument type="service">
-          <service class="Symfony\Bundle\AsseticBundle\Factory\Resource\CoalescingDirectoryResource" public="false">
-            <tag name="assetic.templating.twig"/>
-            <tag name="assetic.formula_resource" loader="twig"/>
-            <argument type="collection">
-              <argument type="service">
-                <service class="%assetic.directory_resource.class%" public="false">
-                  <argument type="service" id="templating.loader"/>
-                  <argument>PoivrePlanningBundle</argument>
-                  <argument>C:\wamp\www\poivre\app/Resources/PoivrePlanningBundle/views</argument>
-                  <argument>/^[^.]+\.[^.]+\.twig$/</argument>
-                </service>
-              </argument>
-              <argument type="service">
-                <service class="%assetic.directory_resource.class%" public="false">
-                  <argument type="service" id="templating.loader"/>
-                  <argument>PoivrePlanningBundle</argument>
-                  <argument>C:\wamp\www\poivre\src\Poivre\PlanningBundle/Resources/views</argument>
-                  <argument>/^[^.]+\.[^.]+\.twig$/</argument>
-                </service>
-              </argument>
-            </argument>
-          </service>
-        </argument>
-        <argument>twig</argument>
-      </call>
-      <call method="addResource">
-        <argument type="service">
-          <service class="Symfony\Bundle\AsseticBundle\Factory\Resource\CoalescingDirectoryResource" public="false">
-            <tag name="assetic.templating.twig"/>
-            <tag name="assetic.formula_resource" loader="twig"/>
-            <argument type="collection">
-              <argument type="service">
-                <service class="%assetic.directory_resource.class%" public="false">
-                  <argument type="service" id="templating.loader"/>
-                  <argument>PoivreNoteBundle</argument>
-                  <argument>C:\wamp\www\poivre\app/Resources/PoivreNoteBundle/views</argument>
-                  <argument>/^[^.]+\.[^.]+\.twig$/</argument>
-                </service>
-              </argument>
-              <argument type="service">
-                <service class="%assetic.directory_resource.class%" public="false">
-                  <argument type="service" id="templating.loader"/>
-                  <argument>PoivreNoteBundle</argument>
-                  <argument>C:\wamp\www\poivre\src\Poivre\NoteBundle/Resources/views</argument>
                   <argument>/^[^.]+\.[^.]+\.twig$/</argument>
                 </service>
               </argument>
